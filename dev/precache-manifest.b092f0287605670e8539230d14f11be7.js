@@ -24,15 +24,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-johnpabst/devassets/ship3.png"
   },
   {
-    "revision": "ea8243f9dc9343b26265",
-    "url": "/coding-2-try-phaser-johnpabst/devgen.main.013594ecb355033bbfd2.bundle.js"
+    "revision": "3d1b10ea512de6ee6cab",
+    "url": "/coding-2-try-phaser-johnpabst/devgen.main.55c07f81b68d3c40c1a4.bundle.js"
   },
   {
     "revision": "201b65bee9df6270f739",
     "url": "/coding-2-try-phaser-johnpabst/devgen.vendors.a047ee0740c7d21714d9.bundle.js"
   },
   {
-    "revision": "e7f86f84f15eb175d0dd31b03e444dcf",
+    "revision": "f6ce4f41ba70faf7a718097b9a9bbaa1",
     "url": "/coding-2-try-phaser-johnpabst/devindex.html"
   },
   {
