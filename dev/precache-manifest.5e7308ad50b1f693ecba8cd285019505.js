@@ -24,15 +24,39 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-johnpabst/devassets/ship3.png"
   },
   {
-    "revision": "3d1b10ea512de6ee6cab",
-    "url": "/coding-2-try-phaser-johnpabst/devgen.main.55c07f81b68d3c40c1a4.bundle.js"
+    "revision": "ea801e18a4f14b0c4740b555536b414e",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/explosion.png"
   },
   {
-    "revision": "201b65bee9df6270f739",
-    "url": "/coding-2-try-phaser-johnpabst/devgen.vendors.a047ee0740c7d21714d9.bundle.js"
+    "revision": "ff70e55fbb2b70941d98b3e7ab1a01aa",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/player.png"
   },
   {
-    "revision": "f6ce4f41ba70faf7a718097b9a9bbaa1",
+    "revision": "05427110fd2c2de1d4738b31496a53c9",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/power-up.png"
+  },
+  {
+    "revision": "6387e4bedb194c28efe573c1cc5ce303",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/ship.png"
+  },
+  {
+    "revision": "4888982b102ce1a7c57fb9f8c129e63d",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/ship2.png"
+  },
+  {
+    "revision": "15d30c88882683af9f5092c13dc13853",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/ship3.png"
+  },
+  {
+    "revision": "2d9a00934cd4bed30c1c",
+    "url": "/coding-2-try-phaser-johnpabst/devgen.main.5e70f84c83c04bbc8fc3.bundle.js"
+  },
+  {
+    "revision": "7e3abc0967d71642756e",
+    "url": "/coding-2-try-phaser-johnpabst/devgen.vendors.bbe9474c65e057812275.bundle.js"
+  },
+  {
+    "revision": "a1dda39523310aa3fdd58752d43e4d74",
     "url": "/coding-2-try-phaser-johnpabst/devindex.html"
   },
   {
