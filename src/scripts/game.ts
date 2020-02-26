@@ -6,7 +6,9 @@ import GameConfig = Phaser.Types.Core.GameConfig;
 const DEFAULT_WIDTH = 256;
 const DEFAULT_HEIGHT = 272;
 
-
+export const gameSettings = {
+    playerSpeed: 200,
+}
 const config: GameConfig = {
     backgroundColor: '#FFFFFF',
     scale: {
@@ -21,7 +23,7 @@ const config: GameConfig = {
         default: 'arcade',
         arcade: {
             debug: false,
-            gravity: { y: 400 }
+            //gravity: { y: 400 }
         }
     }
 };
