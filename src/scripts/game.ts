@@ -8,8 +8,6 @@ const DEFAULT_HEIGHT = 400;
 
 
 const config: GameConfig = {
-    width: 256,
-    height: 272,
     backgroundColor: '#FFFFFF',
     scale: {
         parent: 'phaser-game',
