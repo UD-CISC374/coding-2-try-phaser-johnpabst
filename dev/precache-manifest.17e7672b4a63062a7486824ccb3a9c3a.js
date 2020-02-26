@@ -24,15 +24,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-phaser-game-template/devassets/ship3.png"
   },
   {
-    "revision": "4eeddb9fad78f3042659",
-    "url": "/educational-phaser-game-template/devgen.main.854afe072bb09f0834b1.bundle.js"
+    "revision": "9373788a83eaa5cadbba",
+    "url": "/educational-phaser-game-template/devgen.main.7499c3183585dcad5315.bundle.js"
   },
   {
     "revision": "201b65bee9df6270f739",
     "url": "/educational-phaser-game-template/devgen.vendors.a047ee0740c7d21714d9.bundle.js"
   },
   {
-    "revision": "1d37d9ea3cd5c6efd2a46259d7beba6a",
+    "revision": "f11ecef90e5803cde2b41b493def2c31",
     "url": "/educational-phaser-game-template/devindex.html"
   },
   {
