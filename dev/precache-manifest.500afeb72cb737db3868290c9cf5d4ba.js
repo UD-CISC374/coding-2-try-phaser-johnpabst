@@ -24,6 +24,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-johnpabst/devassets/ship3.png"
   },
   {
+    "revision": "6be3462bcaa4a183b678800bb66d176c",
+    "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/beam.png"
+  },
+  {
     "revision": "ea801e18a4f14b0c4740b555536b414e",
     "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/explosion.png"
   },
@@ -48,15 +52,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/coding-2-try-phaser-johnpabst/devassets/spritesheets/ship3.png"
   },
   {
-    "revision": "2d9a00934cd4bed30c1c",
-    "url": "/coding-2-try-phaser-johnpabst/devgen.main.5e70f84c83c04bbc8fc3.bundle.js"
+    "revision": "69d03bc0201370039505",
+    "url": "/coding-2-try-phaser-johnpabst/devgen.main.cfa689915791edd30220.bundle.js"
   },
   {
     "revision": "7e3abc0967d71642756e",
     "url": "/coding-2-try-phaser-johnpabst/devgen.vendors.bbe9474c65e057812275.bundle.js"
   },
   {
-    "revision": "a1dda39523310aa3fdd58752d43e4d74",
+    "revision": "c28089823f4179c7aed1b44e7ae72fa1",
     "url": "/coding-2-try-phaser-johnpabst/devindex.html"
   },
   {
