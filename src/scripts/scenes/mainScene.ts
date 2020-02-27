@@ -13,6 +13,7 @@ export default class MainScene extends Phaser.Scene {
   private powerUps: Phaser.Physics.Arcade.Group;
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   private spacebar: Phaser.Input.Keyboard.Key;
+  enemies: Phaser.Physics.Arcade.Group;
   
 
   constructor() {
@@ -27,6 +28,10 @@ export default class MainScene extends Phaser.Scene {
     this.ship2 = this.add.sprite(this.scale.width / 2, this.scale.height / 2, "ship2");
     this.ship3 = this.add.sprite(this.scale.width / 2 + 50, this.scale.height / 2, "ship3");
 
+    this.enemies = this.physics.add.group();
+    this.enemies.add(this.ship1);
+    this.enemies.add(this.ship2);
+    this.enemies.add(this.ship3);
 
     this.add.text(20,20, "This is the Game",{
       font: "20px Arial",
@@ -51,8 +56,6 @@ export default class MainScene extends Phaser.Scene {
       powerUp.setVelocity(100,100);
       powerUp.setCollideWorldBounds(true);
       powerUp.setBounce(1);
-
-      //this.physics.add.collider(this.projectiles, this.powerUps);
     }
 
     this.ship1.play("ship1_anim");
@@ -72,6 +75,30 @@ export default class MainScene extends Phaser.Scene {
 
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.projectiles = this.add.group();
+
+    this.physics.add.collider(this.projectiles, this.powerUps, function(projectile,powerUp){
+      projectile.destroy();
+    });
+
+    this.physics.add.overlap(this.player, this.powerUps, this.pickPowerUp, undefined, this);
+
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, undefined, this);
+
+    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, undefined, this);
+  }
+  pickPowerUp(player, powerUp){
+    powerUp.disableBody(true, true);
+  }
+
+  hurtPlayer(player, enemy){
+    this.resetShipPos(enemy);
+    player.x = this.scale.width / 2 - 8;
+    player.y = this.scale.height - 64;
+  }
+
+  hitEnemy(projectile, enemy){
+    projectile.destroy();
+    this.resetShipPos(enemy);
   }
 
   moveShip(ship, speed){
