@@ -1,5 +1,6 @@
 import ExampleObject from '../objects/exampleObject';
 import { gameSettings } from "../game";
+import Beam from '../objects/beam';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
@@ -8,9 +9,10 @@ export default class MainScene extends Phaser.Scene {
   private ship2: Phaser.GameObjects.Sprite;
   private ship3: Phaser.GameObjects.Sprite;
   private player: Phaser.Physics.Arcade.Sprite;
-  powerUps: Phaser.Physics.Arcade.Group;
-  cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-  spacebar: Phaser.Input.Keyboard.Key;
+  private projectiles: Phaser.GameObjects.Group;
+  private powerUps: Phaser.Physics.Arcade.Group;
+  private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+  private spacebar: Phaser.Input.Keyboard.Key;
   
 
   constructor() {
@@ -49,6 +51,8 @@ export default class MainScene extends Phaser.Scene {
       powerUp.setVelocity(100,100);
       powerUp.setCollideWorldBounds(true);
       powerUp.setBounce(1);
+
+      //this.physics.add.collider(this.projectiles, this.powerUps);
     }
 
     this.ship1.play("ship1_anim");
@@ -67,6 +71,7 @@ export default class MainScene extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
 
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.projectiles = this.add.group();
   }
 
   moveShip(ship, speed){
@@ -84,6 +89,11 @@ export default class MainScene extends Phaser.Scene {
 
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
       console.log("Fire!");
+      this.shootBeam();
+    }
+    for(let i = 0; i< this.projectiles.getChildren().length; i++){
+      var beam = this.projectiles.getChildren()[i];
+      beam.update();
     }
     this.background.tilePositionY -= 0.5;
   }
@@ -106,6 +116,9 @@ export default class MainScene extends Phaser.Scene {
     ship.x = randomX;
   }
 
+  shootBeam(){
+    var beam = new Beam(this);
+  }
   destroyShip(pointer, gameObject){
     gameObject.setTexture("explosion");
     gameObject.play("explode");
