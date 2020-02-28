@@ -45,14 +45,14 @@ export default class MainScene extends Phaser.Scene {
     graphics.beginPath();
     graphics.moveTo(0,0);
     graphics.lineTo(this.scale.width, 0);
-    graphics.lineTo(this.scale.height, 20);
-    graphics.lineTo(0,20);
+    graphics.lineTo(this.scale.height, 40);
+    graphics.lineTo(0,40);
     graphics.lineTo(0,0);
     graphics.closePath();
     graphics.fillPath();
 
     this.score = 0;
-    this.scoreLabel = this.add.bitmapText(10,5,"pixelFont", "SCORE ", 16);
+    this.scoreLabel = this.add.bitmapText(10,5,"pixelFont", "SCORE ", 40);
 
     this.beamSound = this.sound.add("audio_beam");
     this.explosionSound = this.sound.add("audio_explosion");
@@ -208,7 +208,7 @@ export default class MainScene extends Phaser.Scene {
       var beam = this.projectiles.getChildren()[i];
       beam.update();
     }
-    this.background.tilePositionY -= 0.5;
+    this.background.tilePositionX += 0.5;
   }
 
   movePlayerManager(){
