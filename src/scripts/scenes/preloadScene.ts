@@ -14,15 +14,15 @@ export default class PreloadScene extends Phaser.Scene {
     // this.load.image("ship2","assets/ship2.png");
     // this.load.image("ship3","assets/ship3.png");
 
-    this.load.spritesheet("ship", "assets/spritesheets/ship.png",{
-      frameWidth: 16,
-      frameHeight: 16
+    this.load.spritesheet("frog", "assets/spritesheets/frog.png",{
+      frameWidth: 27,
+      frameHeight: 38
     });
-    this.load.spritesheet("ship2", "assets/spritesheets/ship2.png",{
+    this.load.spritesheet("totodile", "assets/spritesheets/totodile.png",{
       frameWidth: 32,
-      frameHeight: 16
+      frameHeight: 32
     });
-    this.load.spritesheet("ship3", "assets/spritesheets/ship3.png",{
+    this.load.spritesheet("link", "assets/spritesheets/minishCap.png",{
       frameWidth: 32,
       frameHeight: 32
     });
@@ -34,9 +34,9 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-    this.load.spritesheet("player", "assets/spritesheets/player.png",{
-      frameWidth: 16,
-      frameHeight: 24
+    this.load.spritesheet("player", "assets/spritesheets/nessBike.png",{
+      frameWidth: 32,
+      frameHeight: 32
     });
     this.load.spritesheet("beam", "assets/spritesheets/beam.png",{
       frameWidth: 16,
@@ -52,20 +52,20 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.anims.create({
       key:"ship1_anim",
-      frames: this.anims.generateFrameNumbers("ship",{ start: 0, end: 1 }),
-      frameRate: 20,
+      frames: this.anims.generateFrameNumbers("frog",{ start: 0, end: 4 }),
+      frameRate: 8,
       repeat: -1
     });
     this.anims.create({
       key:"ship2_anim",
-      frames: this.anims.generateFrameNumbers("ship2",{ start: 0, end: 1 }),
+      frames: this.anims.generateFrameNumbers("totodile",{ start: 0, end: 2 }),
       frameRate: 20,
       repeat: -1
     });
     this.anims.create({
       key:"ship3_anim",
-      frames: this.anims.generateFrameNumbers("ship3",{ start: 0, end: 1 }),
-      frameRate: 20,
+      frames: this.anims.generateFrameNumbers("link",{ start: 0, end: 10 }),
+      frameRate: 10,
       repeat: -1
     });
     this.anims.create({
@@ -90,8 +90,8 @@ export default class PreloadScene extends Phaser.Scene {
     });
     this.anims.create({
       key:"thrust",
-      frames: this.anims.generateFrameNumbers("player",{ start: 0, end: 2}),
-      frameRate: 20,
+      frames: this.anims.generateFrameNumbers("player",{ start: 0, end: 1}),
+      frameRate: 10,
       repeat: -1
     });
     this.anims.create({
