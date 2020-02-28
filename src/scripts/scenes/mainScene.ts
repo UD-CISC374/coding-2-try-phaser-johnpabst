@@ -1,6 +1,7 @@
 import ExampleObject from '../objects/exampleObject';
 import { gameSettings } from "../game";
 import Beam from '../objects/beam';
+import Explosion from '../objects/explosion';
 
 export default class MainScene extends Phaser.Scene {
   private exampleObject: ExampleObject;
@@ -13,7 +14,13 @@ export default class MainScene extends Phaser.Scene {
   private powerUps: Phaser.Physics.Arcade.Group;
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
   private spacebar: Phaser.Input.Keyboard.Key;
-  enemies: Phaser.Physics.Arcade.Group;
+  private enemies: Phaser.Physics.Arcade.Group;
+  private scoreLabel: Phaser.GameObjects.BitmapText;
+  private score: number;
+  private beamSound: Phaser.Sound.BaseSound;
+  private explosionSound: Phaser.Sound.BaseSound;
+  private pickupSound: Phaser.Sound.BaseSound;
+  private music: Phaser.Sound.BaseSound;
   
 
   constructor() {
@@ -33,11 +40,37 @@ export default class MainScene extends Phaser.Scene {
     this.enemies.add(this.ship2);
     this.enemies.add(this.ship3);
 
-    this.add.text(20,20, "This is the Game",{
-      font: "20px Arial",
-      bold: true,
-      color:"yellow"
-    });
+    var graphics = this.add.graphics();
+    graphics.fillStyle(0x000000, 1);
+    graphics.beginPath();
+    graphics.moveTo(0,0);
+    graphics.lineTo(this.scale.width, 0);
+    graphics.lineTo(this.scale.height, 20);
+    graphics.lineTo(0,20);
+    graphics.lineTo(0,0);
+    graphics.closePath();
+    graphics.fillPath();
+
+    this.score = 0;
+    this.scoreLabel = this.add.bitmapText(10,5,"pixelFont", "SCORE ", 16);
+
+    this.beamSound = this.sound.add("audio_beam");
+    this.explosionSound = this.sound.add("audio_explosion");
+    this.pickupSound = this.sound.add("audio_pickup");
+
+    this.music = this.sound.add("music");
+
+    var musicConfig = {
+      mute: false,
+      volume: 1,
+      rate:1,
+      detune:0,
+      seek:0,
+      loop: false,
+      delay: 0
+    }
+    
+    this.music.play(musicConfig);
 
     this.powerUps = this.physics.add.group();
 
@@ -87,18 +120,69 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, undefined, this);
   }
   pickPowerUp(player, powerUp){
+    this.pickupSound.play();
     powerUp.disableBody(true, true);
   }
 
   hurtPlayer(player, enemy){
+    this.explosionSound.play();
     this.resetShipPos(enemy);
-    player.x = this.scale.width / 2 - 8;
-    player.y = this.scale.height - 64;
+
+    if(this.player.alpha < 1){
+      return;
+    }
+
+    let explosion = new Explosion(this, player.x, player.y);
+
+    player.disableBody(true, true);
+
+    //this.resetPlayer();
+    this.time.addEvent({
+      delay:1000,
+      callback: this.resetPlayer,
+      callbackScope: this,
+      loop: false
+    });
+  }
+
+  resetPlayer(){
+    let x = this.scale.width / 2 - 8;
+    let y = this.scale.height + 64;
+    this.player.enableBody(true,x,y,true,true);
+
+    this.player.alpha = 0.5;
+
+    var tween = this.tweens.add({
+      targets: this.player,
+      y: this.scale.height - 64,
+      ease: 'Power1',
+      duration: 1500,
+      repeat:0,
+      onComplete: () => {
+        this.player.alpha = 1;
+      },
+      callbackScope: this
+    });
+  }
+
+  zeroPad(number, size) {
+    let stringNumber = String(number);
+    while(stringNumber.length < (size || 2)) {
+      stringNumber = "0" + stringNumber;
+    }
+    return stringNumber;
   }
 
   hitEnemy(projectile, enemy){
+    this.explosionSound.play();
+    let explosion = new Explosion(this, enemy.x, enemy.y);
+
     projectile.destroy();
     this.resetShipPos(enemy);
+    this.score += 15;
+    
+    var scoreFormatted = this.zeroPad(this.score, 6);
+    this.scoreLabel.text = "SCORE " + scoreFormatted;
   }
 
   moveShip(ship, speed){
@@ -108,6 +192,7 @@ export default class MainScene extends Phaser.Scene {
     }
   }
   update() {
+    this.player.setVelocity(0);
     this.moveShip(this.ship1, 1);
     this.moveShip(this.ship2, 2);
     this.moveShip(this.ship3, 3);
@@ -115,8 +200,9 @@ export default class MainScene extends Phaser.Scene {
     this.movePlayerManager();
 
     if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
-      console.log("Fire!");
-      this.shootBeam();
+      if(this.player.active){
+        this.shootBeam();
+      }
     }
     for(let i = 0; i< this.projectiles.getChildren().length; i++){
       var beam = this.projectiles.getChildren()[i];
@@ -128,13 +214,17 @@ export default class MainScene extends Phaser.Scene {
   movePlayerManager(){
     if(this.cursorKeys.left?.isDown){
       this.player.setVelocityX(-gameSettings.playerSpeed);
+      console.log();
     } else if(this.cursorKeys.right?.isDown){
       this.player.setVelocityX(gameSettings.playerSpeed);
+      console.log("right");
     }
     if(this.cursorKeys.up?.isDown){
       this.player.setVelocityY(-gameSettings.playerSpeed);
+      console.log("up");
     } else if(this.cursorKeys.down?.isDown){
       this.player.setVelocityY(gameSettings.playerSpeed);
+      this.player.setVelocityY(gameSettings.playerSpeed);console.log("down");
     }
   }
   resetShipPos(ship){
@@ -145,6 +235,7 @@ export default class MainScene extends Phaser.Scene {
 
   shootBeam(){
     var beam = new Beam(this);
+    this.beamSound.play();
   }
   destroyShip(pointer, gameObject){
     gameObject.setTexture("explosion");

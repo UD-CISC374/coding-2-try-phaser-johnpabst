@@ -7,7 +7,7 @@ const DEFAULT_WIDTH = 256;
 const DEFAULT_HEIGHT = 272;
 
 export const gameSettings = {
-    playerSpeed: 200,
+    playerSpeed: 175,
 }
 const config: GameConfig = {
     backgroundColor: '#FFFFFF',
